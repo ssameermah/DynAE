@@ -19,6 +19,9 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.neighbors import NearestNeighbors
 from datasets import generate_data_batch, generate_transformed_batch
+import tensorflow.python.keras.backend as K
+
+
 
 PATH_RESULT = '/content/drive/My Drive/Colab/DynAE/results'
 PATH_VIS = '/content/drive/My Drive/Colab/DynAE/visualisation'
@@ -421,7 +424,7 @@ class DynAE:
         nb_conf_prev = x.shape[0]
         index_array = np.arange(x.shape[0])
         delta_kappa = 0.3 * kappa
-        sess = tf.keras.backend.get_session()
+        sess = K.get_session() #sess = tf.keras.backend.get_session() # my edit
         for ite in range(int(maxiter)):
             if ite % validate_interval == 0:
                 x_emb = self.encoder.predict(x)
